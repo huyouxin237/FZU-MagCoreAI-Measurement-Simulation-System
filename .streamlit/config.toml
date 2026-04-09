@@ -1,0 +1,11 @@
+[server]
+maxUploadSize = 2048
+maxMessageSize = 2048
+enableWebsocketCompression = false
+websocketPingInterval = 30
+
+[client]
+showErrorDetails = "full"
+
+[logger]
+level = "debug"

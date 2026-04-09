@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+
+  build_and_test:
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          submodules: recursive
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Create/activate venv
+        run: |
+          uv venv --python 3.9
+          source .venv/bin/activate
+
+      - name: Test with nox
+        run: |
+          uv pip install nox
+          uv run python -m nox 
