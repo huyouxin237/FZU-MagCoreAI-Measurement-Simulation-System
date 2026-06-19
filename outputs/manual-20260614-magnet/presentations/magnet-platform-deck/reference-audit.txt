@@ -1,0 +1,19 @@
+Reference strengths:
+- clear technical title
+- left-to-right workflow
+- strong blue/red stage arrows
+- product UI and model diagram used as proof objects
+- high information density appropriate for a competition display
+
+Improve in this deck:
+- split the story across multiple slides
+- increase whitespace and title hierarchy
+- keep each slide focused on one claim
+- use consistent connectors and fewer overlapping elements
+- distinguish experimental data, AI surrogate, circuit simulation, and FEM post-processing
+
+Do not imitate:
+- unofficial competition logo
+- crowded bottom paragraphs
+- overly dense single-page composition
+- mixed unrelated font sizes and alignment

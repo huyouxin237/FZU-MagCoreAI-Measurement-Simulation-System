@@ -1,0 +1,35 @@
+Primary profile: engineering-platform
+Profile gate: PASS
+
+Scores:
+- story: 5/5
+- specificity: 5/5
+- rhythm: 4/5
+- whitespace: 4/5
+- chart clarity: 4/5
+- typography: 4/5
+- restraint: 4/5
+- precision: 5/5
+- coherence: 5/5
+- reference delta: 4/5
+Total: 44/50
+
+Reference comparison:
+- Beats reference through a seven-slide technical narrative rather than one crowded poster.
+- Preserves directional workflow, blue/red stage language, model proof objects, and engineering specificity.
+- Reference remains denser for single-page poster use; this deck is stronger for oral presentation.
+
+Package checks:
+- 7 slides exported
+- embedded PNG assets present
+- PPTX non-empty
+- no unsupported performance metrics
+
+Render checks:
+- all slides rendered at 1280x720
+- no visible image placeholders
+- no text overflow in final contact-sheet review
+- split-inline warnings on adjacent metric labels and paired output buttons are intentional
+
+Residual tradeoff:
+- technical architecture images are embedded raster proof objects; surrounding titles, labels, flows, and diagrams remain editable.

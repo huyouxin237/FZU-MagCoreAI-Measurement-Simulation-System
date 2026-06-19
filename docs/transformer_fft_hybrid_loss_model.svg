@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="234" height="427" viewBox="0 0 234 427">
+  <defs>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 Z" fill="#111"/>
+    </marker>
+    <style>
+      .label { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size: 9px; fill: #111; text-anchor: middle; dominant-baseline: middle; }
+      .small { font-size: 8px; }
+      .section { font-family: "Times New Roman", serif; font-size: 10px; font-weight: 700; fill: #111; }
+      .box { stroke: #111; stroke-width: 1; }
+      .line { stroke: #111; stroke-width: 1.15; fill: none; marker-end: url(#arrow); }
+      .plain-line { stroke: #111; stroke-width: 1.15; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="234" height="427" fill="#fff"/>
+
+  <!-- Output -->
+  <rect x="75" y="2" width="84" height="27" fill="#f4f2cf" class="box"/>
+  <rect x="73" y="4" width="84" height="27" fill="none" stroke="#00a8ff" stroke-width="1"/>
+  <text x="117" y="16" class="label">损耗密度 Pcv</text>
+
+  <!-- Fusion / projector -->
+  <rect x="3" y="36" width="228" height="105" rx="12" fill="#d9d9d9" stroke="#111" stroke-width="1.5"/>
+  <path d="M4 128 Q5 140 18 141 H216 Q229 140 230 127" fill="none" stroke="#00a8ff" stroke-width="1.3"/>
+  <text x="190" y="57" class="section">Fusion</text>
+
+  <rect x="77" y="47" width="80" height="22" fill="#cce0ed" class="box"/>
+  <text x="117" y="58" class="label">三层 MLP 回归</text>
+
+  <rect x="68" y="79" width="99" height="23" fill="#cce0ed" class="box"/>
+  <text x="117.5" y="90.5" class="label">多特征拼接融合</text>
+
+  <rect x="13" y="111" width="66" height="21" fill="#eaf3dc" class="box"/>
+  <text x="46" y="121.5" class="label small">FFT 前16阶</text>
+
+  <rect x="84" y="111" width="69" height="21" fill="#f7eac8" class="box"/>
+  <text x="118.5" y="121.5" class="label small">Transformer特征</text>
+
+  <rect x="159" y="111" width="60" height="21" fill="#eaf3dc" class="box"/>
+  <text x="189" y="121.5" class="label small">T, f, Hdc, Bm</text>
+
+  <path d="M117 47 V30" class="line"/>
+  <path d="M117 79 V69" class="line"/>
+  <path d="M46 111 V90 H68" class="line"/>
+  <path d="M118 111 V102" class="line"/>
+  <path d="M189 111 V90 H167" class="line"/>
+
+  <!-- Encoder -->
+  <rect x="3" y="145" width="228" height="231" rx="17" fill="#d9d9d9" stroke="#111" stroke-width="1.5"/>
+  <path d="M4 358 Q5 375 21 376 H213 Q229 375 230 357" fill="none" stroke="#00a8ff" stroke-width="1.3"/>
+  <text x="176" y="350" class="section">Encoder</text>
+
+  <rect x="77" y="158" width="80" height="21" fill="#f7eac8" class="box"/>
+  <text x="117" y="168.5" class="label">平均池化</text>
+
+  <rect x="68" y="193" width="99" height="22" fill="#cce0ed" class="box"/>
+  <text x="117.5" y="204" class="label">前馈神经网络</text>
+
+  <rect x="77" y="229" width="80" height="21" fill="#f7eac8" class="box"/>
+  <text x="117" y="239.5" class="label">层归一化</text>
+
+  <rect x="69" y="267" width="97" height="22" fill="#dcebd2" class="box"/>
+  <text x="117.5" y="278" class="label">多头自注意力</text>
+
+  <rect x="77" y="305" width="80" height="21" fill="#f7eac8" class="box"/>
+  <text x="117" y="315.5" class="label">层归一化</text>
+
+  <rect x="12" y="334" width="64" height="24" rx="7" fill="#bfd0e8" class="box"/>
+  <text x="44" y="346" class="label small">波形类型选择</text>
+
+  <circle cx="117" cy="346" r="14" fill="#fff" stroke="#111" stroke-width="2"/>
+  <path d="M109 346 H125 M117 338 V354" stroke="#111" stroke-width="3"/>
+
+  <!-- Main upward flow -->
+  <path d="M117 334 V326" class="line"/>
+  <path d="M117 305 V289" class="line"/>
+  <path d="M117 267 V250" class="line"/>
+  <path d="M117 229 V215" class="line"/>
+  <path d="M117 193 V179" class="line"/>
+  <path d="M117 158 V141" class="line"/>
+
+  <!-- Clean side connections, routed outside all blocks -->
+  <path d="M117 305 H55 V278 H69" class="line"/>
+  <path d="M117 229 H55 V204 H68" class="line"/>
+
+  <!-- FFT bypass -->
+  <path d="M117 377 H2 V139 H46 V132" class="line"/>
+  <text x="8" y="251" class="label small" transform="rotate(-90 8 251)">FFT分支</text>
+
+  <!-- Waveform type selects the encoder branch -->
+  <path d="M76 346 H103" class="line"/>
+
+  <!-- B input -->
+  <rect x="72" y="381" width="90" height="42" fill="#eef4d9" class="box"/>
+  <rect x="70" y="383" width="90" height="42" fill="none" stroke="#00a8ff" stroke-width="1"/>
+  <text x="116" y="399" class="label">B(t) 波形</text>
+  <path d="M95 411 C103 393 109 393 116 411 C123 429 130 429 138 411" stroke="#111" stroke-width="1" fill="none"/>
+  <path d="M117 381 V360" class="line"/>
+</svg>

@@ -1,0 +1,8 @@
+task mode: create
+primary deck-profile: engineering-platform
+secondary profile gates: product-platform clarity
+required proof objects: one end-to-end product workflow and concrete capability groups
+source/asset requirements: user-provided competition inner-page background; functions verified from the local website code review
+brand authenticity constraints: preserve the supplied competition logo only; do not recreate or modify it
+profile-specific QA gates: technically specific labels, clear reading direction, editable shapes, no ambiguous connectors
+known missing inputs: final website screenshots and result images will be inserted by the user

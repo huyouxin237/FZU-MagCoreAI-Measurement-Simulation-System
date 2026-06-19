@@ -1,0 +1,23 @@
+Source: local MagNet repository.
+
+Code sources:
+- app/main.py: five product modules and navigation
+- app/ui_intro.py: B-H waveform prediction, material ranking, CSV output
+- app/ui_db.py: database filtering, waveform preview, scatter plot, CSV download
+- app/ui_predict.py: interactive core-loss prediction for standard/arbitrary waveforms
+- src/magnet/simplecs/simfunctions.py: Buck/Boost/Flyback/DAB circuit workflows
+- app/ui_fem.py and src/magnet/core_fem.py: FLD upload, mesh processing, neural surrogate prediction, 3D output
+- src/magnet/net.py: lightweight Transformer encoder-decoder for H waveform prediction
+- src/magnet/MagNet_Model_Flash3_126.py: Transformer-FFT hybrid Pcv model
+
+Visual assets:
+- app/img/system-photo.jpg: bundled experimental setup photograph
+- app/img/system-overview.jpg: bundled measurement system diagram
+- app/img/measurement-range.jpg: bundled measurement range visual
+- app/img/transformer.jpg: bundled Transformer architecture visual
+- app/img/school_logo.png: bundled institutional logo
+- docs/transformer_fft_hybrid_loss_model.png: locally generated architecture diagram based on repository model code
+
+Reference image:
+- user-provided single-slide competition-style technical presentation screenshot
+- used only as a visual-quality reference, not as an official template or brand source

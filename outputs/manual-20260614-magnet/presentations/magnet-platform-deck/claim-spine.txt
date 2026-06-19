@@ -1,0 +1,28 @@
+Thesis:
+MagNet 将磁性材料实验数据库、轻量 Transformer 代理模型、电路波形仿真与有限元场后处理整合为一个浏览器交互平台。
+
+Audience:
+科研竞赛评委、磁性器件研究人员、电力电子设计人员和教学用户。
+
+Arc:
+数据基础 → 在线预测 → 电路级分析 → 空间级损耗分布 → 统一工程价值。
+
+Slides:
+1. 平台把磁芯损耗分析从分散脚本整合为在线工程工作流
+   Proof: five-module platform map plus experimental-system image.
+2. 一套平台贯通数据查询、AI预测与两级仿真
+   Proof: end-to-end directional workflow.
+3. 实验数据库让材料与工况筛选可视、可查、可下载
+   Proof: measurement-range visual plus editable filter/result UI.
+4. 轻量 Transformer 由 B 波形重建 H 波形并计算 B-H 损耗
+   Proof: accurate model pipeline and output panels.
+5. 电路仿真先生成真实激励波形，再由代理模型快速估算磁芯损耗
+   Proof: topology-to-waveform-to-loss sequence.
+6. FEM 模块不在线求解 Maxwell，而是对 FLD 场数据执行网格级 AI 损耗预测
+   Proof: FLD processing and Transformer-FFT surrogate workflow.
+7. 平台覆盖科研、教学与工程设计的同一条数据闭环
+   Proof: user-value matrix and capability summary.
+
+Omissions:
+- no unsupported model accuracy or speed claims
+- no fabricated deployment, user, or business metrics

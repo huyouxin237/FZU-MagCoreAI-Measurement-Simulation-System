@@ -1,0 +1,3 @@
+The supplied PNG is treated as the required visual background, not as a content layout.
+Preserve: pale circuit texture, whitespace, top-right competition logo.
+Avoid: placing content behind the logo or overloading the bright technical pattern on the right.

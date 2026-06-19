@@ -1,0 +1,9 @@
+thesis: The website unifies measured-data exploration, AI loss prediction, circuit simulation, and FEM-level loss mapping in one browser workflow.
+audience: competition judges and technical reviewers
+one-line arc: define material and operating conditions, choose the analysis depth, and obtain visualized/exportable loss results.
+
+slide 1:
+- claim: One platform connects data, AI prediction, circuit analysis, and FEM loss mapping.
+- proof object: editable left-to-right workflow with three concrete capability groups and image placeholders.
+- source: local website implementation.
+- omission: detailed Transformer-FFT architecture is intentionally excluded because it is covered on another slide.

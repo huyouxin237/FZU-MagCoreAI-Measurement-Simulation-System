@@ -1,0 +1,23 @@
+task mode: create
+primary deck-profile: engineering-platform
+secondary gates: product-platform
+required proof objects:
+- end-to-end platform workflow
+- database and interactive prediction capability map
+- B-H Transformer surrogate architecture
+- circuit simulation workflow
+- FEM mesh loss prediction workflow
+- concrete material/model/input/output coverage
+source requirements:
+- local repository code and bundled project assets only
+- no invented accuracy, latency, user, or commercial metrics
+brand constraints:
+- use only the bundled school logo when needed
+- do not fabricate competition or institutional marks
+QA gates:
+- all connectors have explicit direction
+- technical labels remain accurate
+- no text overflow at 1280x720
+- varied slide rhythm with no repeated card-grid cadence
+known missing inputs:
+- no live production screenshots or externally verified deployment metrics

@@ -195,6 +195,11 @@ def ui_intro(m):
                     help='由直流偏置电流决定')
 
             st.write('下一步：选择或上传 B 波形。')
+            st.markdown("""---""")
+            st.write(
+                '- D. Serrano 等，《Why MagNet: Quantifying the Complexity of Modeling Power Magnetic Material Characteristics》，IEEE TPEL，doi:10.1109/TPEL.2023.3291084。 [论文链接](https://ieeexplore.ieee.org/document/10169101)')
+            st.write(
+                '- H. Li 等，《How MagNet: Machine Learning Framework for Modeling Power Magnetic Material Characteristics》，IEEE TPEL，doi:10.1109/TPEL.2023.3309232。 [论文链接](https://ieeexplore.ieee.org/document/10232863)')
 
             if bias < 0:
                 st.warning("偏置低于 0 A/m，结果可能为外推。")

@@ -1,42 +1,158 @@
-[![Build](https://github.com/PrincetonUniversity/magnet/actions/workflows/main.yml/badge.svg)](https://github.com/PrincetonUniversity/magnet/actions/workflows/main.yml)
-![MagNet Logo](app/img/magnetlogo.jpg)
+# 新型高频磁性材料磁芯损耗全流程自动化建模与仿真系统
 
-Princeton MagNet is a large-scale dataset designed to enable researchers to model magnetic core loss using machine learning to accelerate the design process of power electronics. The dataset contains a large amount of voltage and current data of different magnetic components with different shapes of waveforms and different properties measured in the real world. Researchers may use these data as pairs of excitations and responses to build up analytical magnetic models or calculate the core loss to derive static models.
+本项目面向高频、高功率密度电力电子系统中新型磁性材料磁芯损耗测试效率低、样本数量少、模型迁移困难和工程应用脱节等问题，构建了一套集自动化测量、数据处理、AI 建模、工程仿真部署与智能体调度于一体的磁芯损耗全流程自动化系统。
 
-## Website
+系统通过自动化测试平台获取多维工况下的磁芯损耗数据，结合数据清洗、特征提取、模型训练、迁移学习与 Web 可视化部署，实现从“实验测试—数据建模—损耗预测—工程应用”的闭环流程，为新型高频磁性材料的性能评估和磁性器件优化设计提供智能化工具。
 
-Princeton MagNet is currently deployed at https://mag-net.princeton.edu/
+---
 
-## MagNet Challenge [Link](https://github.com/minjiechen/magnetchallenge)
+## 项目简介
 
-[Download the Latest Version of the MagNet Handbook (03-25-2023)](magnetchallenge/handbook.pdf)
+随着新能源、电动汽车、数据中心和 AI 服务器等高功率密度应用快速发展，磁性元件在功率变换器中的损耗占比不断提高。传统斯坦梅茨方程在复杂非正弦波形、多温度、多频率、直流偏置和新型材料条件下存在泛化能力不足、建模精度有限等问题。
 
-## Documentation
+本项目围绕磁芯损耗建模与工程应用需求，搭建自动化磁芯损耗测试平台，设计 AI 损耗预测模型，并将模型部署至 Web 平台，实现磁性材料数据采集、模型训练、损耗预测和工程调用的自动化集成。
 
-The web application for Princeton MagNet uses the `magnet` package, a python package under development where most of
-the functionality is exposed. Before `magnet` is released on PyPI, it can be installed using
-`pip install git+https://github.com/PrincetonUniversity/magnet`.
+---
 
-Please `pip install mag-net` and `pip install .` in the magnet folder before running streamlit.
+## 系统功能
 
-## How to Cite
+- 多工况磁芯损耗自动化测试
+- 频率、磁通密度、温度、占空比、波形类型等参数自动扫描
+- 电压、电流、磁通密度和损耗数据自动采集
+- 数据清洗、周期完整性检查与异常数据识别
+- 相位补偿、磁饱和识别与标准化入库
+- Transformer 磁芯损耗预测模型训练
+- 小样本新材料迁移学习建模
+- Web 平台可视化展示与工程化部署
+- 工程仿真接口调用与智能体流程调度
 
-If you used MagNet, please cite us with the following.
+---
 
-- D. Serrano et al., "Why MagNet: Quantifying the Complexity of Modeling Power Magnetic Material Characteristics," in IEEE Transactions on Power Electronics, doi: 10.1109/TPEL.2023.3291084. [Paper](https://ieeexplore.ieee.org/document/10169101)
+## 技术路线
 
-- H. Li et al., "How MagNet: Machine Learning Framework for Modeling Power Magnetic Material Characteristics," in IEEE Transactions on Power Electronics, doi: 10.1109/TPEL.2023.3309232. [Paper](https://ieeexplore.ieee.org/document/10232863)
+本系统整体流程包括：
 
-- H. Li, D. Serrano, S. Wang and M. Chen, "MagNet-AI: Neural Network as Datasheet for Magnetics Modeling and Material Recommendation," in IEEE Transactions on Power Electronics, doi: 10.1109/TPEL.2023.3309233. [Paper](https://ieeexplore.ieee.org/document/10232911)
+1. 自动化测量平台采集磁芯损耗数据  
+2. 上位机控制实验设备完成多工况扫描  
+3. 原始数据经过清洗、筛选和标准化处理  
+4. 构建高质量磁芯损耗数据集  
+5. 训练 Transformer 磁芯损耗预测模型  
+6. 通过迁移学习适配新型小样本磁性材料  
+7. 将模型部署至 Web 平台和工程仿真系统  
+8. 实现测试、建模、预测和应用的全流程自动化  
 
-## Team Members
+---
 
-Princeton MagNet is currently maintained by the Power Electronics Research Lab as Princeton University. We also collaborate with Dartmouth College, and Plexim.
+## 项目结构
 
-![MagNet Team](app/img/magnetteam.jpg)
+```text
+.
+├── app/                 # Web 应用程序与可视化平台
+├── docs/                # 项目文档与说明材料
+├── magnetchallenge/     # 数据集、模型测试与挑战相关内容
+├── outputs/             # 模型输出结果与实验结果
+├── scripts/             # 数据处理、模型训练和辅助脚本
+├── src/                 # 核心算法、模型与功能模块
+├── tests/               # 测试文件
+├── tutorial/            # 使用教程与示例
+├── README.md            # 项目说明文件
+├── pyproject.toml       # Python 项目配置文件
+├── noxfile.py           # 自动化测试与环境配置文件
+└── LICENSE              # 开源许可证
+```
 
-## Sponsors
+---
 
-This work is sponsored by the ARPA-E DIFFERENTIATE Program, Princeton CSML DataX program, Princeton Andlinger Center for Energy and the Environment, and National Science Foundation under the NSF CAREER Award. 
+## 核心模块
 
-![MagNet Sponsor](app/img/sponsor.jpg)
+### 1. 自动化测量模块
+
+系统基于双绕组交流功率法和多波形激励硬件，结合 Python 上位机与通信接口，实现多维实验工况的自动扫描与数据采集。该模块能够显著提高磁芯损耗测试效率，降低人工调参和重复测量成本。
+
+### 2. 数据处理模块
+
+系统对采集到的原始电压、电流和磁通密度数据进行预处理，包括周期截取、异常点剔除、相位补偿、饱和识别、特征计算和标准化入库，形成可用于模型训练的高质量数据集。
+
+### 3. AI 建模模块
+
+系统构建基于 Transformer 的磁芯损耗预测模型，利用多维工况参数和磁芯响应数据学习复杂非线性损耗规律，提高非正弦波形和复杂工况下的预测精度。
+
+### 4. 迁移学习模块
+
+针对新型磁性材料样本数量少、重新测试成本高的问题，系统引入迁移学习方法，将已有材料上的模型知识迁移至小样本新材料，提高模型泛化能力和工程适配能力。
+
+### 5. Web 平台模块
+
+系统将数据管理、模型调用、损耗预测和结果展示部署至 Web 平台，方便用户进行在线预测、参数配置、结果查看和工程应用。
+
+---
+
+## 创新点
+
+1. 构建覆盖测量、处理、建模、预测和应用的磁芯损耗全流程自动化系统。  
+2. 面向新型小样本磁性材料，引入迁移学习方法提升模型泛化能力。  
+3. 打通 AI 模型、工程仿真和 Web 平台，实现磁芯损耗模型的工程化部署。  
+
+---
+
+## 应用场景
+
+本系统可应用于：
+
+- 高频磁性材料损耗建模
+- 磁芯材料性能评估
+- 电力电子变换器磁性元件设计
+- 高频变压器与电感器损耗预测
+- 新能源、电动汽车、AI 服务器电源等高功率密度场景
+- 磁性元件数字化设计与工程仿真
+
+---
+
+## 环境配置
+
+建议使用 Python 3.8 及以上版本。
+
+安装依赖：
+
+```bash
+pip install -r requirements.txt
+```
+
+如果项目采用本地包安装方式，可使用：
+
+```bash
+pip install .
+```
+
+---
+
+## 运行方式
+
+进入项目目录后，运行 Web 应用：
+
+```bash
+streamlit run app.py
+```
+
+如果入口文件位于 `app/` 文件夹中，可根据实际文件名运行，例如：
+
+```bash
+streamlit run app/main.py
+```
+
+---
+
+## 项目特点
+
+- 测试流程自动化  
+- 数据处理标准化  
+- 建模过程智能化  
+- 小样本材料可迁移  
+- 预测结果可视化  
+- 工程应用可部署  
+
+---
+
+## 许可证
+
+本项目仅用于科研、教学与竞赛展示。具体使用方式请参考项目许可证文件。

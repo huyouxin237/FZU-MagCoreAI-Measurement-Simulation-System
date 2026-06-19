@@ -1,0 +1,7 @@
+Background asset:
+- D:\1\Study\team\研电赛\PPT内页.png
+- User-provided official competition inner-page background.
+
+Content source:
+- Local MagNetAI website repository reviewed earlier in this thread.
+- No unsupported performance metrics are used.

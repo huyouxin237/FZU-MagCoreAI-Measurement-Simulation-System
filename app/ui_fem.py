@@ -15,8 +15,11 @@ from magnet.constants import material_list
 def ui_fem_analysis(m):
     st.markdown("""---""")
 
-    # 后台预置 zip 路径
-    PRESET_FLD_ZIP_PATH = r"D:\ANSYS\fld.zip"
+    # 后台预置 zip 目录路径
+    PRESET_FLD_DIR = r"D:\ANSYS"
+
+    # 初始化预置文件路径默认值
+    PRESET_FLD_ZIP_PATH = None
 
     # ================= 1. 网格数据解析参数设置 =================
     st.header(f'1. 设置仿真工况参数')
@@ -71,11 +74,21 @@ def ui_fem_analysis(m):
         st.info("请在本地将 Ansys Maxwell 导出的多个时间步的 .fld 文件打包为一个 .zip 压缩包并上传。")
         uploaded_fld_zip = st.file_uploader("上传 fld 数据的 .zip 压缩包", type=["zip"], key=f'zip_{m}')
     else:
-        st.info(f"将直接调用服务器预置文件：{PRESET_FLD_ZIP_PATH}")
-        if os.path.exists(PRESET_FLD_ZIP_PATH):
-            st.success("已检测到服务器预置 fld.zip 文件。")
+        # 扫描服务器预置目录，列出所有 zip 文件供选择
+        if os.path.exists(PRESET_FLD_DIR):
+            zip_files = sorted([f for f in os.listdir(PRESET_FLD_DIR) if f.endswith('.zip')])
+            if zip_files:
+                selected_zip_name = st.selectbox(
+                    "选择服务器预置 fld.zip 文件",
+                    options=zip_files,
+                    key=f"preset_zip_{m}"
+                )
+                PRESET_FLD_ZIP_PATH = os.path.join(PRESET_FLD_DIR, selected_zip_name)
+                st.success(f"已选择：{selected_zip_name}（完整路径：{PRESET_FLD_ZIP_PATH}）")
+            else:
+                st.error(f"未在服务器目录 {PRESET_FLD_DIR} 中找到任何 .zip 文件")
         else:
-            st.error(f"未找到服务器预置文件：{PRESET_FLD_ZIP_PATH}")
+            st.error(f"服务器预置目录不存在：{PRESET_FLD_DIR}")
 
     uploaded_hdc_fld = st.file_uploader("上传 Hdc.fld 文件 (可选)", type=["fld", "txt"], key=f'hdc_fld_{m}')
 
@@ -86,9 +99,13 @@ def ui_fem_analysis(m):
             st.error("请先上传包含 .fld 文件的 zip 压缩包！")
             return
 
-        if data_source == "使用服务器预置 fld.zip" and not os.path.exists(PRESET_FLD_ZIP_PATH):
-            st.error(f"服务器预置文件不存在：{PRESET_FLD_ZIP_PATH}")
-            return
+        if data_source == "使用服务器预置 fld.zip":
+            if not PRESET_FLD_ZIP_PATH:
+                st.error(f"未选择任何预置文件，请检查服务器目录：{PRESET_FLD_DIR}")
+                return
+            if not os.path.exists(PRESET_FLD_ZIP_PATH):
+                st.error(f"服务器预置文件不存在：{PRESET_FLD_ZIP_PATH}")
+                return
 
         progress_bar = st.progress(0, text="初始化处理流程...")
 
