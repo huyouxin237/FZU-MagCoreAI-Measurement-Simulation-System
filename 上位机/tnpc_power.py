@@ -7,6 +7,7 @@ Safety defaults:
   - Symmetric mode: both units output same voltage, both default to +V
   - IDN verified on connect (must contain "62012" or "62000")
 """
+import os
 import time
 import pyvisa
 
@@ -134,9 +135,9 @@ class PowerPanel(QGroupBox):
     emergency_off() 被主窗口的紧急停止按钮调用，绝不抛异常。
     """
 
-    # Default VISA addresses (pre-filled, user can override via dropdown)
-    DEFAULT_ADDR_P1 = "USB0::0x1698::0x0837::004000001534::INSTR"
-    DEFAULT_ADDR_P2 = "USB0::0x1698::0x0837::004000000589::INSTR"
+    # Optional local defaults; keep real lab resource IDs out of version control.
+    DEFAULT_ADDR_P1 = os.environ.get("TNPC_POWER_P1_VISA", "")
+    DEFAULT_ADDR_P2 = os.environ.get("TNPC_POWER_P2_VISA", "")
 
     def __init__(self, parent_window):
         super().__init__("Power Supplies (+bus / -bus)")

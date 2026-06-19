@@ -1,6 +1,7 @@
 import pyvisa  # Control over USB (for the scope), GPIB, Ethernet, etc
 import numpy as np
 import csv
+import os
 import time  # To wait specific time
 import serial  # To control the power supplies and DSP
 import scipy.integrate as integrate  # Just to get k from ki for Steinmetz Eqs
@@ -226,7 +227,7 @@ r = scope.query('*opc?')
 if sine_or_trap == 1:  # For trapezoidal
     vdc = serial.Serial()
     vdc.baudrate = 57600
-    vdc.port = 'COM3'
+    vdc.port = os.environ.get("MAGNET_VDC_SERIAL_PORT", "")
     vdc.timeout = 2
     # print(vdc)
     vdc.open()
@@ -263,7 +264,7 @@ if sine_or_trap == 1:  # For trapezoidal
 if sine_or_trap == 1:  # For trapezoidal
     dsp = serial.Serial()
     dsp.baudrate = 4800
-    dsp.port = 'COM7'
+    dsp.port = os.environ.get("MAGNET_DSP_SERIAL_PORT", "")
     dsp.timeout = 2
     # print(dsp)
     dsp.open()

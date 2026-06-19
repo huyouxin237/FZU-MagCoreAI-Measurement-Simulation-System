@@ -10,6 +10,7 @@ Page 3: Teledyne LeCroy HDO6104A oscilloscope control panel
 3. 如果没有这两个文件，第一页会显示占位页面，串口连接、紧急停止按钮和后续页面仍可正常打开。
 """
 
+import os
 import sys
 import time
 import re
@@ -1425,9 +1426,9 @@ class ScopePage(QWidget):
     auto_status_signal = pyqtSignal(str)
     error_signal = pyqtSignal(str)
 
-    DEFAULT_ADDR = "USB0::0x05FF::0x1023::3566N52467::INSTR"
-    SCREEN_SAVE_DIR = Path(r"D:\桌面")
-    REALTIME_SAVE_DIR = Path(r"D:\桌面\示波器实时数据")
+    DEFAULT_ADDR = os.environ.get("TNPC_SCOPE_VISA", "")
+    SCREEN_SAVE_DIR = Path(os.environ.get("TNPC_SCREEN_SAVE_DIR", "outputs/scope/screens"))
+    REALTIME_SAVE_DIR = Path(os.environ.get("TNPC_REALTIME_SAVE_DIR", "outputs/scope/realtime"))
 
     VOLTAGE_CHANNEL = "C1"
     CURRENT_CHANNEL = "C2"
@@ -1507,7 +1508,7 @@ class ScopePage(QWidget):
         rl.addWidget(self.auto_btn, 0, 2)
         rl.addWidget(self.read_btn, 0, 3)
         rl.addWidget(self.screen_btn, 0, 4)
-        rl.addWidget(QLabel(r"屏幕图保存路径：D:\桌面"), 1, 0, 1, 5)
+        rl.addWidget(QLabel(f"屏幕图保存路径：{self.SCREEN_SAVE_DIR}"), 1, 0, 1, 5)
         main.addWidget(run)
 
         # CSV one-shot saving
@@ -1544,7 +1545,7 @@ class ScopePage(QWidget):
         auto_box = QGroupBox("自动扫描测量 / 自动保存")
         al = QGridLayout(auto_box)
 
-        self.auto_root_dir_edit = QLineEdit(r"D:\桌面")
+        self.auto_root_dir_edit = QLineEdit(os.environ.get("TNPC_AUTO_ROOT_DIR", "outputs/scope/auto"))
         self.auto_scan_settings_btn = QPushButton("扫描设置")
         self.auto_scan_settings_btn.clicked.connect(self.open_scope_scan_settings)
         self.auto_scan_summary_label = QLabel("")
@@ -2009,7 +2010,7 @@ class ScopePage(QWidget):
     def save_screen_image(self):
         def task():
             self.require_connected()
-            self.message_signal.emit("正在保存当前屏幕图到 D:\\桌面，请稍等...")
+            self.message_signal.emit(f"正在保存当前屏幕图到 {self.SCREEN_SAVE_DIR}，请稍等...")
             file_path = self.scope.save_screen_image(self.SCREEN_SAVE_DIR)
             self.message_signal.emit(f"屏幕图已保存：{file_path}")
 

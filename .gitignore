@@ -147,3 +147,46 @@ src/magnet/_version.py
 
 # Pycharm files
 .idea/
+
+# GitHub release hygiene: keep local device/lab secrets out of the repo
+.env.*
+!.env.example
+*.local
+*.local.*
+local_config.*
+device_config.*
+serial_config.*
+visa_config.*
+private_config.*
+secrets.*
+*.secret
+*.key
+*.pem
+*.pfx
+*.p12
+*.crt
+*.cer
+*.lic
+*.license
+*.auth
+*.token
+
+# Local IDE/debug and generated hardware build artifacts
+.vscode/
+*.launch
+**/Debug/
+**/Release/
+*.out
+*.map
+*.obj
+*.d
+*.pp
+*.opt
+*_linkInfo.xml
+.clangd/
+.cache/
+
+# Generated reports, exports, and local experiment outputs
+outputs/
+node_modules/
+*.csv.local

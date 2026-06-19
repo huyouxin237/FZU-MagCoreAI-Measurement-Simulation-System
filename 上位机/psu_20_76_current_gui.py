@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 import pyvisa
@@ -48,11 +49,11 @@ class PSU2076CurrentSource(QWidget):
         conn_group = QGroupBox("电流源连接")
         conn_layout = QVBoxLayout(conn_group)
 
-        self.addr_input = QLineEdit("ASRL9::INSTR")
+        self.addr_input = QLineEdit(os.environ.get("TNPC_CURRENT_SOURCE_VISA", ""))
         self.btn_connect = QPushButton("连接电流源")
         self.btn_disconnect = QPushButton("断开连接")
 
-        conn_layout.addWidget(QLabel("VISA 地址，例如 ASRL9::INSTR："))
+        conn_layout.addWidget(QLabel("VISA 地址，例如 ASRL::INSTR 或 USB/LAN VISA 资源："))
         conn_layout.addWidget(self.addr_input)
 
         conn_btn_layout = QHBoxLayout()
@@ -342,7 +343,7 @@ class PSU2076CurrentSource(QWidget):
             self.inst = self.rm.open_resource(addr)
             self.inst.timeout = 10000
 
-            # 如果是串口 ASRL，例如 ASRL9::INSTR
+            # 如果是串口 ASRL 资源
             if addr.upper().startswith("ASRL"):
                 self.inst.baud_rate = 9600
                 self.inst.data_bits = 8
